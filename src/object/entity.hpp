@@ -7,10 +7,11 @@ struct Entity {
     vec2 position;
     vec2 size;
     vec4 color;
+    bool toDelete = false;
 
     virtual void update(float /*dt*/) {}
 
-    virtual void render() const {
+    virtual void render() {
         // color
         glColor4f(color.r, color.g, color.b, color.a);
 

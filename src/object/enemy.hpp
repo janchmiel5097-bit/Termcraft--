@@ -1,17 +1,17 @@
 #pragma once
 #include <algorithm>
 #include <cmath>
-#include <iostream>
+#include <cstdlib>
 #include "entity.hpp"
 #include "../global.hpp"
 #include "player.hpp"
 
 struct EnemyEntity :Entity {
-    float speed = 75.0F;
+    float speed = (std::rand() % 70)+15.0F;
 
     explicit EnemyEntity(
         vec2 _size = vec2(30.0F, 30.0F),
-        vec2 _pos = vec2(0.0F, 0.0F),
+        vec2 _pos = vec2((std::rand() % WINDOW_WIDTH), (std::rand() % WINDOW_HEIGHT)),
         vec4 _color = vec4(0.8, 0.1, 0.0)
     ) {
         size = _size;
@@ -44,13 +44,13 @@ struct EnemyEntity :Entity {
                        position.y <= GLOBAL_PLAYER_POSITON.y + GLOBAL_PLAYER_SIZE.y;
             if (playerOverlap && !ENTITIES.empty()) {
                 auto* PLAYER = dynamic_cast<PlayerEntity*>(ENTITIES[0].get());
-                PLAYER->damage(1);
+                PLAYER->damage(1, position);
             }
         }
 
     }
 
-    void render() const override {
+    void render() override {
         glColor4f(color.r, color.g, color.b, color.a);
 
         const int segments = 40;                // more = smoother

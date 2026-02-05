@@ -1,6 +1,7 @@
 # flags
 CXX      := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -Ithirdparty/glad/include
+# remove -g for release
+CXXFLAGS := -std=c++17 -Wall -Wextra -g -Ithirdparty/glad/include
 
 # libs
 LIBS     := -lglfw -lGL

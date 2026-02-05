@@ -17,7 +17,13 @@ struct vec2 {
     vec2 operator*(const float& f) const { return vec2(x * f, y * f); }
     vec2 operator/(const float& f) const { return vec2(x / f, y / f); }
     vec2& operator+=(const vec2& o) { x += o.x; y += o.y; return *this; }
+    vec2& operator-=(const float& f) { x -= f; y -= f; return *this; }
     vec2& operator*=(const float& f) { x *= f; y *= f; return *this; }
+    [[nodiscard]] float length() const { return std::sqrt(x*x + y*y); }
+    [[nodiscard]] vec2 normalized() const {
+        float len = length();
+        return (len != 0.0f) ? vec2(x / len, y / len) : vec2(0.0f, 0.0f);
+    }
 };
 
 struct vec4 {
